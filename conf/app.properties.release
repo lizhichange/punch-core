@@ -1,0 +1,72 @@
+# Environment
+product.env=RELEASE
+wechat.configCode=FULIHUI_WECHAT
+
+
+wechat.punch.configCode=FULIHUI_YOUFULI
+
+
+# Datasource code
+datasouce.code=PUNCH_DATASOURCE
+
+
+# log4j configuration file
+fulihui.log4j.config.path=file:conf/log4j.xml
+
+dubbo.application.name=punch-core
+dubbo.registry.protocol=zookeeper
+dubbo.registry.address=172.16.0.112:2181,172.16.0.111:2181,172.16.0.104:2181
+dubbo.protocol.name=dubbo
+dubbo.protocol.serialization=json
+dubbo.protocol.port=20882
+dubbo.protocol.threads=2000
+
+
+
+# Zbus
+zbus.broker.address=172.16.0.104:15555
+
+
+# Redis pool
+redis.pool.host=r-uf62826fe4206cc4.redis.rds.aliyuncs.com
+redis.pool.port=6379
+redis.pool.timeout=3000
+redis.pool.password=1qaz2WSX
+redis.config.maxtotal=100
+redis.config.maxidle=20
+
+
+
+# public static final Boolean TRUE = new Boolean(true);
+# static final Boolean FALSE = new Boolean(false);
+
+mock.test.run=false
+#每天早上8点提醒参与用户打卡
+notify.job.cron=0 0 8 * * ? *
+#每天10点过1秒统计打卡成功 失败人数 参与人数
+wait.not.care.job=1 0 10 * * ? *
+#每5分钟检查订单同步信息
+order.check.job=0 0/5 * * * ?
+#每天10点30分统计用户发放金额
+sub.amount.job=0 30 10 * * ?
+#每天11点执行打卡成功人数发放金额
+user.amount.job=0 0 11 * * ?
+#每天0点初始化奖池金额
+jackpot.job.cron=0 0 0 * * ?
+#每天1点统计活动参数人数 支付金额
+user.punch.job=0 0 1 * * ?
+
+
+
+
+#淘客14点执行一次
+
+taoKe.amount.job=0 0 14 * * ?
+
+#淘客订单数据
+tao.data.job=0 0/5 * * * ? *
+
+tao.appKey=24649181
+tao.appSecret=f793f82634088ba5acb135d5527884c9
+tao.router=https://eco.taobao.com/router/rest
+tao.adzoneId=287302619

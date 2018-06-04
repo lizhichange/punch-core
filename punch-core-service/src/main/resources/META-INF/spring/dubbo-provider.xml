@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://code.alibabatech.com/schema/dubbo
+                           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:provider timeout="3000" version="1.0.0"
+                    validation="true" filter="exceptionFilter"/>
+
+    <dubbo:annotation id="provider" package="com.fulihui.punch"/>
+
+
+    <dubbo:service ref="userPunchService" version="1.0.0" interface="com.fulihui.punch.api.UserPunchService"/>
+
+    <dubbo:service ref="punchSubsidyService" interface="com.fulihui.punch.api.PunchSubsidyService"/>
+
+    <dubbo:service ref="statisticsService" interface="com.fulihui.punch.api.StatisticsService"/>
+
+    <dubbo:service ref="userPunchCountService" interface="com.fulihui.punch.api.UserPunchCountService"/>
+
+
+    <dubbo:service ref="jackpotAmountService" interface="com.fulihui.punch.api.JackpotAmountService"/>
+
+
+    <dubbo:service ref="userPunchAmountService" interface="com.fulihui.punch.api.UserPunchAmountService"/>
+
+    <dubbo:service ref="taoService" interface="com.fulihui.punch.api.TaoService"/>
+
+
+    <dubbo:service ref="userDetailService" interface="com.fulihui.punch.api.UserDetailService"/>
+
+
+    <dubbo:service ref="punchWechatTokenService" interface="com.fulihui.punch.api.PunchWechatTokenService"/>
+
+    <dubbo:service ref="weiXinTemplateService" interface="com.fulihui.punch.api.WeiXinTemplateService"/>
+
+
+</beans>

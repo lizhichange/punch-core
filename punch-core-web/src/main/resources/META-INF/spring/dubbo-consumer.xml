@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                           http://code.alibabatech.com/schema/dubbo
+                           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <dubbo:consumer check="false" timeout="3000" version="1.0.0"/>
+
+    <!--
+      注解 @Reference 注入 Dubbo 服务必须包装起来，服务版本号是写在注解中的，
+      分散依赖会造成修改服务版本号时难以维护
+    -->
+    <dubbo:annotation id="consumer" package="com.fulihui.punch.web.integration"/>
+
+
+    <dubbo:reference id="userPunchService"
+                     interface="com.fulihui.punch.api.UserPunchService" validation="true" version="1.0.0"/>
+
+    <dubbo:reference id="wechatConfigService"
+                     interface="com.fulihui.systemcore.api.WechatConfigService" validation="true" version="1.0.1"/>
+
+
+    <dubbo:reference id="wechatTokenService"
+                     interface="com.fulihui.systemcore.api.WechatTokenService" validation="true" version="1.0.0"/>
+
+    <dubbo:reference id="generalBannerService"
+                     interface="com.fulihui.welfarecentre.facade.api.BannerService" version="1.0.0"/>
+
+    <dubbo:reference id="userDetailService"
+                     interface="com.fulihui.punch.api.UserDetailService" version="1.0.0"/>
+
+
+    <dubbo:reference id="punchWechatTokenService"
+                     interface="com.fulihui.punch.api.PunchWechatTokenService" version="1.0.0"/>
+
+</beans>

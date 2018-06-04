@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fulihui.punch.dal.mapper.UserPunchStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.fulihui.punch.dal.dataobj.UserPunchStatistics" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pay_amount" property="payAmount" jdbcType="BIGINT" />
+    <result column="success_num" property="successNum" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="period_date" property="periodDate" jdbcType="DATE" />
+    <result column="pay_one_amount" property="payOneAmount" jdbcType="BIGINT" />
+    <result column="subsidy_amount" property="subsidyAmount" jdbcType="BIGINT" />
+    <result column="total_amount" property="totalAmount" jdbcType="BIGINT" />
+    <result column="subsidy_setup_amount" property="subsidySetupAmount" jdbcType="BIGINT" />
+    <result column="fail_num" property="failNum" jdbcType="BIGINT" />
+    <result column="partake_num" property="partakeNum" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, pay_amount, success_num, gmt_create, gmt_modified, period_date, pay_one_amount, 
+    subsidy_amount, total_amount, subsidy_setup_amount, fail_num, partake_num
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fulihui.punch.dal.dataobj.UserPunchStatisticsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_punch_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.fulihui.punch.dal.dataobj.UserPunchStatisticsExample" >
+    delete from user_punch_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.fulihui.punch.dal.dataobj.UserPunchStatistics" >
+    insert into user_punch_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="payAmount != null" >
+        pay_amount,
+      </if>
+      <if test="successNum != null" >
+        success_num,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="periodDate != null" >
+        period_date,
+      </if>
+      <if test="payOneAmount != null" >
+        pay_one_amount,
+      </if>
+      <if test="subsidyAmount != null" >
+        subsidy_amount,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="subsidySetupAmount != null" >
+        subsidy_setup_amount,
+      </if>
+      <if test="failNum != null" >
+        fail_num,
+      </if>
+      <if test="partakeNum != null" >
+        partake_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="payAmount != null" >
+        #{payAmount,jdbcType=BIGINT},
+      </if>
+      <if test="successNum != null" >
+        #{successNum,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="periodDate != null" >
+        #{periodDate,jdbcType=DATE},
+      </if>
+      <if test="payOneAmount != null" >
+        #{payOneAmount,jdbcType=BIGINT},
+      </if>
+      <if test="subsidyAmount != null" >
+        #{subsidyAmount,jdbcType=BIGINT},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="subsidySetupAmount != null" >
+        #{subsidySetupAmount,jdbcType=BIGINT},
+      </if>
+      <if test="failNum != null" >
+        #{failNum,jdbcType=BIGINT},
+      </if>
+      <if test="partakeNum != null" >
+        #{partakeNum,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fulihui.punch.dal.dataobj.UserPunchStatisticsExample" resultType="java.lang.Integer" >
+    select count(*) from user_punch_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_punch_statistics
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.payAmount != null" >
+        pay_amount = #{record.payAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.successNum != null" >
+        success_num = #{record.successNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.periodDate != null" >
+        period_date = #{record.periodDate,jdbcType=DATE},
+      </if>
+      <if test="record.payOneAmount != null" >
+        pay_one_amount = #{record.payOneAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.subsidyAmount != null" >
+        subsidy_amount = #{record.subsidyAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.totalAmount != null" >
+        total_amount = #{record.totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.subsidySetupAmount != null" >
+        subsidy_setup_amount = #{record.subsidySetupAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.failNum != null" >
+        fail_num = #{record.failNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.partakeNum != null" >
+        partake_num = #{record.partakeNum,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_punch_statistics
+    set id = #{record.id,jdbcType=INTEGER},
+      pay_amount = #{record.payAmount,jdbcType=BIGINT},
+      success_num = #{record.successNum,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      period_date = #{record.periodDate,jdbcType=DATE},
+      pay_one_amount = #{record.payOneAmount,jdbcType=BIGINT},
+      subsidy_amount = #{record.subsidyAmount,jdbcType=BIGINT},
+      total_amount = #{record.totalAmount,jdbcType=BIGINT},
+      subsidy_setup_amount = #{record.subsidySetupAmount,jdbcType=BIGINT},
+      fail_num = #{record.failNum,jdbcType=BIGINT},
+      partake_num = #{record.partakeNum,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fulihui.punch.dal.dataobj.UserPunchStatistics" >
+    update user_punch_statistics
+    <set >
+      <if test="payAmount != null" >
+        pay_amount = #{payAmount,jdbcType=BIGINT},
+      </if>
+      <if test="successNum != null" >
+        success_num = #{successNum,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="periodDate != null" >
+        period_date = #{periodDate,jdbcType=DATE},
+      </if>
+      <if test="payOneAmount != null" >
+        pay_one_amount = #{payOneAmount,jdbcType=BIGINT},
+      </if>
+      <if test="subsidyAmount != null" >
+        subsidy_amount = #{subsidyAmount,jdbcType=BIGINT},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="subsidySetupAmount != null" >
+        subsidy_setup_amount = #{subsidySetupAmount,jdbcType=BIGINT},
+      </if>
+      <if test="failNum != null" >
+        fail_num = #{failNum,jdbcType=BIGINT},
+      </if>
+      <if test="partakeNum != null" >
+        partake_num = #{partakeNum,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

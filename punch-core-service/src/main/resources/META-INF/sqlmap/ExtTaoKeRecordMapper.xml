@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fulihui.punch.dal.mapper.ExtTaoKeRecordMapper">
+    <resultMap id="BaseResultMap" type="com.fulihui.punch.dal.dataobj.TaoKeRecord">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="bind_time" jdbcType="TIMESTAMP" property="bindTime"/>
+        <result column="member_id" jdbcType="INTEGER" property="memberId"/>
+        <result column="order_tk_type" jdbcType="VARCHAR" property="orderTkType"/>
+        <result column="register_time" jdbcType="TIMESTAMP" property="registerTime"/>
+        <result column="site_id" jdbcType="VARCHAR" property="siteId"/>
+        <result column="site_name" jdbcType="VARCHAR" property="siteName"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="union_id" jdbcType="VARCHAR" property="unionId"/>
+        <result column="buy_time" jdbcType="TIMESTAMP" property="buyTime"/>
+        <result column="tb_trade_parent_id" jdbcType="BIGINT" property="tbTradeParentId"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="adzone_id" jdbcType="VARCHAR" property="adzoneId"/>
+        <result column="adzone_name" jdbcType="VARCHAR" property="adzoneName"/>
+        <result column="member_nick" jdbcType="VARCHAR" property="memberNick"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        union_id
+    </sql>
+
+    <select id="group" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tao_ke_record
+        where 1=1
+        <if test="startTime != null ">
+            <![CDATA[   and gmt_create >= #{startTime} ]]>
+        </if>
+        <if test="endTime != null ">
+            <![CDATA[     and gmt_create <= #{endTime} ]]>
+        </if>
+        GROUP BY union_id
+        limit ${offset}, ${limit}
+    </select>
+
+
+    <!--SELECT count(1) from  ( select  union_id, count(1)-->
+    <!--from `tao_ke_record`-->
+
+    <!--GROUP BY union_id   ) t-->
+
+    <select id="count" resultType="int">
+        SELECT count(1) from (select
+        union_id, count(1)
+        from tao_ke_record
+        where 1=1
+        <if test="startTime != null ">
+            <![CDATA[   and gmt_create >= #{startTime} ]]>
+        </if>
+        <if test="endTime != null ">
+            <![CDATA[     and gmt_create <= #{endTime} ]]>
+        </if>
+        GROUP BY union_id ) t
+
+    </select>
+</mapper>

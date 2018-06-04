@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fulihui.punch.dal.mapper.WechatTokenDOMapper">
+    <resultMap id="BaseResultMap" type="com.fulihui.punch.dal.dataobj.WechatTokenDO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="appid" jdbcType="VARCHAR" property="appid"/>
+        <result column="token_type" jdbcType="VARCHAR" property="tokenType"/>
+        <result column="token_value" jdbcType="VARCHAR" property="tokenValue"/>
+        <result column="expires_sec" jdbcType="BIGINT" property="expiresSec"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="modified_by" jdbcType="VARCHAR" property="modifiedBy"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, appid, token_type, token_value, expires_sec, gmt_create, create_by, gmt_modified,
+        modified_by
+    </sql>
+    <select id="selectByExample" parameterType="com.fulihui.punch.dal.dataobj.WechatTokenDOExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_wechat_token
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limit != null">
+            <if test="offset != null">
+                limit ${offset}, ${limit}
+            </if>
+            <if test="offset == null">
+                limit ${limit}
+            </if>
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_wechat_token
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_wechat_token
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.fulihui.punch.dal.dataobj.WechatTokenDOExample">
+        delete from t_wechat_token
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.fulihui.punch.dal.dataobj.WechatTokenDO">
+        insert into t_wechat_token (id, appid, token_type,
+        token_value, expires_sec, gmt_create,
+        create_by, gmt_modified, modified_by
+        )
+        values (#{id,jdbcType=INTEGER}, #{appid,jdbcType=VARCHAR}, #{tokenType,jdbcType=VARCHAR},
+        #{tokenValue,jdbcType=VARCHAR}, #{expiresSec,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=VARCHAR}, #{gmtModified,jdbcType=TIMESTAMP}, #{modifiedBy,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.fulihui.punch.dal.dataobj.WechatTokenDO">
+        insert into t_wechat_token
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="appid != null">
+                appid,
+            </if>
+            <if test="tokenType != null">
+                token_type,
+            </if>
+            <if test="tokenValue != null">
+                token_value,
+            </if>
+            <if test="expiresSec != null">
+                expires_sec,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="modifiedBy != null">
+                modified_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="appid != null">
+                #{appid,jdbcType=VARCHAR},
+            </if>
+            <if test="tokenType != null">
+                #{tokenType,jdbcType=VARCHAR},
+            </if>
+            <if test="tokenValue != null">
+                #{tokenValue,jdbcType=VARCHAR},
+            </if>
+            <if test="expiresSec != null">
+                #{expiresSec,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifiedBy != null">
+                #{modifiedBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.fulihui.punch.dal.dataobj.WechatTokenDOExample"
+            resultType="java.lang.Long">
+        select count(*) from t_wechat_token
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_wechat_token
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.appid != null">
+                appid = #{record.appid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tokenType != null">
+                token_type = #{record.tokenType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tokenValue != null">
+                token_value = #{record.tokenValue,jdbcType=VARCHAR},
+            </if>
+            <if test="record.expiresSec != null">
+                expires_sec = #{record.expiresSec,jdbcType=BIGINT},
+            </if>
+            <if test="record.gmtCreate != null">
+                gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createBy != null">
+                create_by = #{record.createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gmtModified != null">
+                gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.modifiedBy != null">
+                modified_by = #{record.modifiedBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_wechat_token
+        set id = #{record.id,jdbcType=INTEGER},
+        appid = #{record.appid,jdbcType=VARCHAR},
+        token_type = #{record.tokenType,jdbcType=VARCHAR},
+        token_value = #{record.tokenValue,jdbcType=VARCHAR},
+        expires_sec = #{record.expiresSec,jdbcType=BIGINT},
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+        modified_by = #{record.modifiedBy,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fulihui.punch.dal.dataobj.WechatTokenDO">
+        update t_wechat_token
+        <set>
+            <if test="appid != null">
+                appid = #{appid,jdbcType=VARCHAR},
+            </if>
+            <if test="tokenType != null">
+                token_type = #{tokenType,jdbcType=VARCHAR},
+            </if>
+            <if test="tokenValue != null">
+                token_value = #{tokenValue,jdbcType=VARCHAR},
+            </if>
+            <if test="expiresSec != null">
+                expires_sec = #{expiresSec,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifiedBy != null">
+                modified_by = #{modifiedBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fulihui.punch.dal.dataobj.WechatTokenDO">
+        update t_wechat_token
+        set appid = #{appid,jdbcType=VARCHAR},
+        token_type = #{tokenType,jdbcType=VARCHAR},
+        token_value = #{tokenValue,jdbcType=VARCHAR},
+        expires_sec = #{expiresSec,jdbcType=BIGINT},
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+        modified_by = #{modifiedBy,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

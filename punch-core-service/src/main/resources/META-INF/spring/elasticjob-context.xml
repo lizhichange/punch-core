@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+       xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.dangdang.com/schema/ddframe/reg
+                        http://www.dangdang.com/schema/ddframe/reg/reg.xsd
+                        http://www.dangdang.com/schema/ddframe/job
+                        http://www.dangdang.com/schema/ddframe/job/job.xsd">
+
+    <!--配置作业注册中心 -->
+    <reg:zookeeper id="regCenter" server-lists="${dubbo.registry.address}" namespace="punch"
+                   base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="1"/>
+
+    <!--每隔5秒执行一次：*/5 * * * * ?-->
+
+    <!--每天凌晨执行：0 0 0 * * ?-->
+
+    <job:simple id="weChatOrderStatusCheckJob"
+                class="com.fulihui.punch.biz.job.WeChatOrderStatusCheckJob" overwrite="true"
+                registry-center-ref="regCenter" cron="${order.check.job}" sharding-total-count="1"/>
+
+    <job:simple id="userAmounJob"
+                class="com.fulihui.punch.biz.job.UserAmounJob" overwrite="true"
+                registry-center-ref="regCenter" cron="${user.amount.job}" sharding-total-count="1"/>
+
+    <job:simple id="userPunchJob"
+                class="com.fulihui.punch.biz.job.UserPunchJob" overwrite="true"
+                registry-center-ref="regCenter" cron="${user.punch.job}" sharding-total-count="1"/>
+
+
+    <!--每天执行：1 0 10 * * ? *-->
+    <!--1 0 10 * * ? *-->
+    <job:simple id="userWaitNotCareJob"
+                class="com.fulihui.punch.biz.job.UserWaitNotCareJob" overwrite="true"
+                description="每天早上10点零1秒将为已支付未打卡的用户置未打卡"
+                registry-center-ref="regCenter" cron="${wait.not.care.job}" sharding-total-count="1"/>
+
+
+    <!--0 0 8 * * ? *-->
+    <job:simple id="userNotifyMessageJob"
+                class="com.fulihui.punch.biz.job.UserNotifyMessageJob" overwrite="true" description="每天早上8点查询已支付的用户来打卡"
+                registry-center-ref="regCenter" cron="${notify.job.cron}" sharding-total-count="1"/>
+
+    <job:simple id="jackpotAmountJob"
+                class="com.fulihui.punch.biz.job.JackpotAmountJob" overwrite="true" description="每天早上0点初始化奖池金额默认值"
+                registry-center-ref="regCenter" cron="${jackpot.job.cron}" sharding-total-count="1"/>
+
+
+    <job:simple id="userSubAmountJob"
+                class="com.fulihui.punch.biz.job.UserSubAmountJob" overwrite="true"
+                description="每天早上10点半统计补贴金额"
+                registry-center-ref="regCenter" cron="${sub.amount.job}" sharding-total-count="1"/>
+
+
+
+
+    <!--<job:simple id="taoKeAmountJob"-->
+                <!--class="com.fulihui.punch.biz.job.TaoKeAmountJob" overwrite="true"-->
+                <!--description="每天下午14点淘客统计"-->
+                <!--registry-center-ref="regCenter" cron="${taoKe.amount.job}" sharding-total-count="1"/>-->
+
+
+    <job:simple id="taoDataJob"
+                class="com.fulihui.punch.biz.job.TaoDataJob" overwrite="true"
+                registry-center-ref="regCenter" cron="${tao.data.job}" sharding-total-count="1"/>
+
+</beans>

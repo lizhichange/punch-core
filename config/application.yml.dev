@@ -1,0 +1,92 @@
+#环境配置
+product:
+  env: STABLE
+  zbusAddress: 192.168.1.51:15555
+
+
+# 微信相关配置
+wechat:
+  # 预授权信息 AES 密钥
+  oauthAesKey: vEqODnP6kosFeL5SyGlUdA==
+  oauthUrl: fulihui.org
+  wechatMPAppid: wxdec688c4f74beeb6
+  # 读取微信配置的代码
+  configCode: FULIHUI_WECHAT
+  hostURL: http://test.fulihui666.cn
+
+
+# 服务配置
+server:
+  port: 8282
+  context-path: /punchweb
+  tomcat:
+    accesslog:
+      enabled: true
+    basedir: .
+    max-threads: 200
+    min-spare-threads: 10
+
+dubbo:
+  application:
+    name: punch-core-web
+  registry:
+    protocol: zookeeper
+    address: 192.168.1.46:2181,192.168.1.45:2181,192.168.1.41:2181
+
+redis:
+  pool:
+    host: 192.168.1.81
+    port: 6379
+    timeout: 3000
+    password: fulihui.com
+    config:
+      maxtotal: 30
+      maxidle: 10
+
+
+
+spring:
+  session:
+    store-type : redis
+  redis:
+    host: 192.168.1.81
+    port: 6379
+    password: fulihui.com
+
+  # 资源配置
+  resources:
+    # 静态资源路径
+    static-locations: file:static/
+
+punch:
+  startTime: 80000
+  endTime: 100000
+
+
+
+sys:
+  doMain: test.fulihui666.cn
+
+mock:
+  auth: false
+  openId: o1PJ60csw4VP3VOPvcWNJ6hFhRMA
+  userId: 24733816631414784
+#"true" : "false";
+  punch: true
+
+
+swagger:
+  show: true
+
+
+
+
+
+
+props:
+  aesKey: oLhMH2xotVCzK7d8urGzeA==
+  wechat:
+    appid: wx77d2cd3bca4c0731
+    appsecret: 8b26980d442c48697b0f1eb16f20b52d
+    callbackUrl: http://${sys.doMain}/punchweb/wechat/callback
+    configCode: FULIHUI_YOUFULI

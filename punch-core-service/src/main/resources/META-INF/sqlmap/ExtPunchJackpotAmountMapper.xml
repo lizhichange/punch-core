@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fulihui.punch.dal.mapper.ExtPunchJackpotAmountMapper">
+    <resultMap id="BaseResultMap" type="com.fulihui.punch.dal.dataobj.PunchJackpotAmount">
+        
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="cumulative_amount" jdbcType="INTEGER" property="cumulativeAmount" />
+        <result column="cumulative_number" jdbcType="INTEGER" property="cumulativeNumber" />
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+        <result column="period_date" jdbcType="DATE" property="periodDate" />
+        <result column="subsidy_amount" jdbcType="INTEGER" property="subsidyAmount" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, cumulative_amount, cumulative_number, gmt_create, gmt_modified, period_date,
+        subsidy_amount
+    </sql>
+
+    <select id="queryMaxPeriodDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from punch_jackpot_amount where period_date=(select max(period_date) from punch_jackpot_amount)
+    </select>
+
+</mapper>

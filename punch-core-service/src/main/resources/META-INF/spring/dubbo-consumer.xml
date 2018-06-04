@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://code.alibabatech.com/schema/dubbo
+                           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:consumer check="false" version="1.0.0" timeout="6000"/>
+
+    <!--
+      注解 @Reference 注入 Dubbo 服务必须包装起来，服务版本号是写在注解中的，
+      分散依赖会造成修改服务版本号时难以维护
+    -->
+    <dubbo:annotation id="consumer" package="com.fulihui.punch.common.integration"/>
+
+    <dubbo:reference id="dataSourceService" interface="org.near.database.api.DataSourceService"/>
+
+    <dubbo:reference id="sequenceService" interface="org.near.database.api.SequenceService"/>
+
+
+    <dubbo:reference version="1.0.1" id="wechatConfigService"
+                     interface="com.fulihui.systemcore.api.WechatConfigService"/>
+
+
+    <dubbo:reference version="1.0.0" id="wechatTokenService"
+                     interface="com.fulihui.systemcore.api.WechatTokenService"/>
+
+    <dubbo:reference version="1.0.1" id="userAccountWithdrawalService"
+                     interface="com.fulihui.accountcore.api.UserAccountWithdrawalService"/>
+
+
+
+
+</beans>

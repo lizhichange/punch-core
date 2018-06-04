@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+
+
+    <context id="default" targetRuntime="MyBatis3">
+        <property name="mergeable" value="false"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.PaginationPlugin"/>
+
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.1.45:3306/punch_test"
+                        userId="punch_test"
+                        password="123456"/>
+
+        <!--jdbc的数据库连接 -->
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.45:3306/activitycore"-->
+                        <!--userId="activitycore" password="o2NAfJV3">-->
+        <!--</jdbcConnection>-->
+
+
+        <javaModelGenerator targetPackage="com.fulihui.punch.dal.dataobj"
+                            targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+
+
+            <!-- 格式化java代码 -->
+            <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+            <!-- 格式化XML代码 -->
+            <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+            <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
+            <property name="enableSubPackages" value="false"/>
+
+            <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
+            <property name="immutable" value="false"/>
+
+            <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
+            <property name="trimStrings" value="false"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="sqlmap" targetProject="src/main/resources/META-INF"/>
+
+        <javaClientGenerator targetPackage="com.fulihui.punch.dal.mapper"
+                             targetProject="src/main/java" type="XMLMAPPER">
+
+            <property name="enableSubPackages" value=""/>
+
+            <property name="exampleMethodVisibility" value=""/>
+
+            <property name="methodNameCalculator" value=""/>
+
+
+            <property name="rootInterface" value=""/>
+        </javaClientGenerator>
+
+
+        <table tableName="tao_prompt" mapperName=""/>
+    </context>
+
+</generatorConfiguration>

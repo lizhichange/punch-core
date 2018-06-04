@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fulihui.punch.dal.mapper.UserPunchRecordMapper">
+  <resultMap id="BaseResultMap" type="com.fulihui.punch.dal.dataobj.UserPunchRecord">
+    <result column="punch_order_id" jdbcType="VARCHAR" property="punchOrderId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
+    <result column="punch_date" jdbcType="TIMESTAMP" property="punchDate" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="pay_date" jdbcType="TIMESTAMP" property="payDate" />
+    <result column="pay_type" jdbcType="VARCHAR" property="payType" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="open_id_channel" jdbcType="VARCHAR" property="openIdChannel" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="pay_decs" jdbcType="VARCHAR" property="payDecs" />
+    <result column="pay_amount" jdbcType="INTEGER" property="payAmount" />
+    <result column="push_start_date" jdbcType="TIMESTAMP" property="pushStartDate" />
+    <result column="push_end_date" jdbcType="TIMESTAMP" property="pushEndDate" />
+    <result column="period_date" jdbcType="DATE" property="periodDate" />
+    <result column="pay_ext_date" jdbcType="DATE" property="payExtDate" />
+    <result column="rebate_amount" jdbcType="INTEGER" property="rebateAmount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    punch_order_id, user_id, out_trade_no, punch_date, status, pay_date, pay_type, open_id, 
+    open_id_channel, gmt_create, gmt_modified, pay_decs, pay_amount, push_start_date, 
+    push_end_date, period_date, pay_ext_date, rebate_amount
+  </sql>
+  <select id="selectByExample" parameterType="com.fulihui.punch.dal.dataobj.UserPunchRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_punch_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.fulihui.punch.dal.dataobj.UserPunchRecordExample">
+    delete from user_punch_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fulihui.punch.dal.dataobj.UserPunchRecord">
+    insert into user_punch_record (punch_order_id, user_id, out_trade_no, 
+      punch_date, status, pay_date, 
+      pay_type, open_id, open_id_channel, 
+      gmt_create, gmt_modified, pay_decs, 
+      pay_amount, push_start_date, push_end_date, 
+      period_date, pay_ext_date, rebate_amount
+      )
+    values (#{punchOrderId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, 
+      #{punchDate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{payDate,jdbcType=TIMESTAMP}, 
+      #{payType,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{openIdChannel,jdbcType=VARCHAR}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{payDecs,jdbcType=VARCHAR}, 
+      #{payAmount,jdbcType=INTEGER}, #{pushStartDate,jdbcType=TIMESTAMP}, #{pushEndDate,jdbcType=TIMESTAMP}, 
+      #{periodDate,jdbcType=DATE}, #{payExtDate,jdbcType=DATE}, #{rebateAmount,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fulihui.punch.dal.dataobj.UserPunchRecord">
+    insert into user_punch_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="punchOrderId != null">
+        punch_order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="outTradeNo != null">
+        out_trade_no,
+      </if>
+      <if test="punchDate != null">
+        punch_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="payDate != null">
+        pay_date,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+      <if test="openIdChannel != null">
+        open_id_channel,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="payDecs != null">
+        pay_decs,
+      </if>
+      <if test="payAmount != null">
+        pay_amount,
+      </if>
+      <if test="pushStartDate != null">
+        push_start_date,
+      </if>
+      <if test="pushEndDate != null">
+        push_end_date,
+      </if>
+      <if test="periodDate != null">
+        period_date,
+      </if>
+      <if test="payExtDate != null">
+        pay_ext_date,
+      </if>
+      <if test="rebateAmount != null">
+        rebate_amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="punchOrderId != null">
+        #{punchOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null">
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="punchDate != null">
+        #{punchDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="payDate != null">
+        #{payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="openIdChannel != null">
+        #{openIdChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payDecs != null">
+        #{payDecs,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmount != null">
+        #{payAmount,jdbcType=INTEGER},
+      </if>
+      <if test="pushStartDate != null">
+        #{pushStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushEndDate != null">
+        #{pushEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="periodDate != null">
+        #{periodDate,jdbcType=DATE},
+      </if>
+      <if test="payExtDate != null">
+        #{payExtDate,jdbcType=DATE},
+      </if>
+      <if test="rebateAmount != null">
+        #{rebateAmount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fulihui.punch.dal.dataobj.UserPunchRecordExample" resultType="java.lang.Long">
+    select count(*) from user_punch_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_punch_record
+    <set>
+      <if test="record.punchOrderId != null">
+        punch_order_id = #{record.punchOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outTradeNo != null">
+        out_trade_no = #{record.outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.punchDate != null">
+        punch_date = #{record.punchDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payDate != null">
+        pay_date = #{record.payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openId != null">
+        open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openIdChannel != null">
+        open_id_channel = #{record.openIdChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gmtCreate != null">
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null">
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payDecs != null">
+        pay_decs = #{record.payDecs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payAmount != null">
+        pay_amount = #{record.payAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.pushStartDate != null">
+        push_start_date = #{record.pushStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pushEndDate != null">
+        push_end_date = #{record.pushEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.periodDate != null">
+        period_date = #{record.periodDate,jdbcType=DATE},
+      </if>
+      <if test="record.payExtDate != null">
+        pay_ext_date = #{record.payExtDate,jdbcType=DATE},
+      </if>
+      <if test="record.rebateAmount != null">
+        rebate_amount = #{record.rebateAmount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_punch_record
+    set punch_order_id = #{record.punchOrderId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      out_trade_no = #{record.outTradeNo,jdbcType=VARCHAR},
+      punch_date = #{record.punchDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR},
+      pay_date = #{record.payDate,jdbcType=TIMESTAMP},
+      pay_type = #{record.payType,jdbcType=VARCHAR},
+      open_id = #{record.openId,jdbcType=VARCHAR},
+      open_id_channel = #{record.openIdChannel,jdbcType=VARCHAR},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      pay_decs = #{record.payDecs,jdbcType=VARCHAR},
+      pay_amount = #{record.payAmount,jdbcType=INTEGER},
+      push_start_date = #{record.pushStartDate,jdbcType=TIMESTAMP},
+      push_end_date = #{record.pushEndDate,jdbcType=TIMESTAMP},
+      period_date = #{record.periodDate,jdbcType=DATE},
+      pay_ext_date = #{record.payExtDate,jdbcType=DATE},
+      rebate_amount = #{record.rebateAmount,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
