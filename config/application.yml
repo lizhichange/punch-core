@@ -7,9 +7,9 @@ product:
 # 微信相关配置
 wechat:
   # 预授权信息 AES 密钥
-  oauthAesKey: vEqODnP6kosFeL5SyGlUdA==
-  oauthUrl: fulihui.org
-  wechatMPAppid: wxdec688c4f74beeb6
+  oauthAesKey:
+  oauthUrl:
+  wechatMPAppid:
   # 读取微信配置的代码
   configCode: FULIHUI_WECHAT
   hostURL: http://test.fulihui666.cn
@@ -64,8 +64,8 @@ punch:
 
 mock:
   auth: false
-  openId: o1PJ60csw4VP3VOPvcWNJ6hFhRMA
-  userId: 24733816631414784
+  openId:
+  userId:
 #"true" : "false";
   punch: false
 
@@ -78,9 +78,9 @@ swagger:
   show: true
 
 props:
-  aesKey: oLhMH2xotVCzK7d8urGzeA==
+  aesKey:
   wechat:
-    appid: wx77d2cd3bca4c0731
-    appsecret: 8b26980d442c48697b0f1eb16f20b52d
+    appid:
+    appsecret:
     callbackUrl: http://${sys.doMain}/punchweb/wechat/callback
     configCode: FULIHUI_YOUXI
